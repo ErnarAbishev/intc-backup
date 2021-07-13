@@ -25,7 +25,7 @@ SECRET_KEY = '*%(qc$ft#(ar51vd*zo0^uwr+vn*q2*1-n(7m@*l+fq(q&+2is'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [] #194.67.116.58
+ALLOWED_HOSTS = ['194.67.110.190']
 
 
 # Application definition
@@ -47,12 +47,18 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_EXPIRE_SECONDS = 900
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 960
+SESSION_TIMEOUT_REDIRECT = '/'
 
 ROOT_URLCONF = 'intcCloud.urls'
 

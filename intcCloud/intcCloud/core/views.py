@@ -36,8 +36,10 @@ def signout(request):
 
 def document_list(request):
     documents = Document.objects.all()
+    count = len(documents)
     return render(request, 'document_list.html', {
-        'documents': documents
+        'documents': documents,
+        'count': count
     })
 
 def upload_document(request):

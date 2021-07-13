@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block documentlist %}
-<div class="container">
+<div class="container-fluid">
   <h1 class="display-4 mb-5 mt-5 text-center">Таблица документов</h1>
   <div class="container">
     <form class="mr-auto mb-5">
@@ -34,6 +34,11 @@
       </div>
     </form>
   </div>
+  {% if request.user.is_superuser %}
+  <div class="mt-5 mb-5">
+  <p class="text-primary">Counter: {{ count }}</p>
+  </div>
+  {% endif %}
   <div id="subject-list">
     <div class="container-fluid table-responsive">
       <table id="myTable" class="table table-hover text-center">
@@ -42,6 +47,7 @@
             <th scope="col" class="text-white">ФИО преподавателя</th>
             <th scope="col" class="text-white">Модуль</th>
             <th scope="col" class="text-white">Дисциплина</th>
+	    <th scope="col" class="text-white">Type</th>
             <th scope="col" class="text-white">Цикл</th>
             <th scope="col" class="text-white">Группа</th>
             <th scope="col" class="text-white">Учебный год</th>
@@ -58,6 +64,7 @@
             <td>{{ document.teacherName }}</td>
             <td>{{ document.documentName }}</td>
             <td>{{ document.documentName2 }}</td>
+	    <td><span class="text-white badge bg-primary">{{ document.documentType }}</span></td>
             <td>{{ document.cycleType }}</td>
             <td>{{ document.studyGroup }}</td>
             <td>{{ document.year }}</td>
@@ -66,7 +73,7 @@
               {% csrf_token %}
               {% if request.user.is_superuser %}
 
-              <td><button class="btn btn-outline-danger">Удалить</button></td>
+              <td><button onclick="alert('Deleted')" class="btn btn-outline-danger">Удалить</button></td>
               <td>{{ document.postDate }}</td>
               {% endif %}
             </form>
